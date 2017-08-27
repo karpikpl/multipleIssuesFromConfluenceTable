@@ -1,48 +1,65 @@
+/*jshint esversion: 6, node: true*/
+'use strict';
+const co = require('co');
+const ReadFile = require('fs-readfile-promise');
 
+const Confluence = require('./lib/confluence');
+const Jira = require('./lib/jira');
+const Xml = require('./lib/xml');
 
-getConfluenceDataAsync(confluencePage)
-    .then((res) => {
+if (process.argv.length < 3) {
+    return console.log('Please provide settings file path as first argument!');
+}
 
-        if (res.data.results.length != 1) {
-            throw `Confluence data not found - check if confluence Page title: '${confluencePage}' is correct`;
-        }
+co(function*() {
 
-        const confluenceResponse = res.data.results[0];
-        let itemsToAdd = parseXml(confluenceResponse.body.view.value);
+    const settingsFile = process.argv[2];
+    console.log(`Reading ${settingsFile} settings file.`);
 
-        console.log(`Parsed items for ${confluencePage}`);
-        console.log(itemsToAdd);
+    const settingsBuffer = yield ReadFile(settingsFile);
+    const settings = JSON.parse(settingsBuffer.toString('utf8'));
 
-        if (!DEBUG) {
-            let jiras = itemsToAdd.map(item => createJira(item).then((res) => {
-                console.log(`Created jira: ${res.data.key}`);
-                item.key = res.data.key;
-                return createRemoteLink(res.data.key)
-            }));
+    const confluenceClient = Confluence.createConfluenceClient(settings);
+    const jiraClient = Jira.createJiraClient(settings);
+    const xmlClient = Xml.createXmlClient(settings);
 
-            return Promise.all(jiras)
-            .then((res) => {
+    const confluenceData = yield confluenceClient.getConfluenceDataAsync(settings.confluencePage);
 
-                console.log(`All items processed ${res.length}`);
-                const jiraMap = itemsToAdd.reduce((map, cur) => {
+    if (confluenceData.data.results.length != 1) {
+        throw `Confluence data not found - check if confluence Page title: '${confluencePage}' is correct`;
+    }
 
-                    map[cur.id] = cur.key;
-                    return map;
-                }, {})
+    const confluenceResponse = confluenceData.data.results[0];
+    const itemsToAdd = xmlClient.parseXml(confluenceResponse.body.view.value);
 
-                const updatedPage = updateXml(confluenceResponse.body.storage.value, jiraMap);
-                console.log(updatedPage);
+    console.log(`Parsed items for ${settings.confluencePage} and got ${itemsToAdd.map((i) => i.id)}`);
 
-                confluenceResponse.body.storage.value = updatedPage;
-                delete confluenceResponse.body.view;
-                confluenceResponse.version.number = confluenceResponse.version.number + 1;
-                confluenceResponse.version.message = 'Updated by Jira-from-Confluence tool';
+    const jiras = yield itemsToAdd.reduce(function*(map, item) {
 
-                console.log(JSON.stringify(confluenceResponse));
+        const createResponse = yield jiraClient.createJira(item);
+        console.log(`Created jira: ${createResponse.data.key}`);
 
-                return postConfluenceDataAsync(confluenceResponse.id, JSON.stringify(confluenceResponse));
-            });
-        }
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.error(err));
+        const linkResponse = yield jiraClient.createRemoteLink(createResponse.data.key);
+        console.log(`Created jira - confluence link: ${linkResponse.statusCode}`);
+
+        console.log('Item:', item);
+        map[item.id] = createResponse.data.key;
+        return map;
+    }, {});
+
+    console.log('Requirements and Jira issues: ', jiras);
+
+    console.log('Updating confluence page XML with jira links');
+    const updatedPage = xmlClient.updateXml(confluenceResponse.body.storage.value, jiras);
+
+    confluenceResponse.body.storage.value = updatedPage;
+    delete confluenceResponse.body.view;
+    confluenceResponse.version.number = confluenceResponse.version.number + 1;
+    confluenceResponse.version.message = 'Updated by Jira-from-Confluence tool';
+
+    console.log('Sending update to confluence');
+
+    return confluenceClient.postConfluenceDataAsync(confluenceResponse.id, JSON.stringify(confluenceResponse));
+})
+.then((res) => console.log('Operation completed!', res || ''))
+.catch((err) => console.error('Operation failed.', err));
