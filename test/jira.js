@@ -24,11 +24,11 @@ describe('Jira', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "epicToLink": 'FR-123'
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'epicToLink': 'FR-123'
                 };
                 const item = {
                     id: 'Req 1',
@@ -71,11 +71,11 @@ describe('Jira', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "epicToLink": 'FR-123'
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'epicToLink': 'FR-123'
                 };
                 const item = {
                     id: 'Req 1',
@@ -123,12 +123,12 @@ describe('Jira', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "epicToLink": 'FR-123',
-                    "pageId": 7898765
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'epicToLink': 'FR-123',
+                    'pageId': 7898765
                 };
                 const key = 'HA-678';
 
@@ -167,12 +167,12 @@ describe('Jira', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "epicToLink": 'FR-123',
-                    "pageId": 7898765
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'epicToLink': 'FR-123',
+                    'pageId': 7898765
                 };
                 const key = 'HA-678';
 

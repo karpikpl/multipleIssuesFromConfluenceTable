@@ -24,11 +24,11 @@ describe('Confluence', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "spaceKey": "PF",
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'spaceKey': 'PF',
                 };
                 const path = 'abc';
 
@@ -67,11 +67,11 @@ describe('Confluence', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "spaceKey": "PF",
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'spaceKey': 'PF',
                 };
                 const path = 'abc';
 
@@ -113,11 +113,11 @@ describe('Confluence', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "spaceKey": "PF",
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'spaceKey': 'PF',
                 };
                 const id = 123456;
                 const data = '<some> confluence data </some>';
@@ -156,11 +156,11 @@ describe('Confluence', () => {
 
                 // arrange
                 const settings = {
-                    "user": "LOGIN",
-                    "pass": "PASSWORD",
-                    "host": "someJira.atlassian.net",
-                    "port": 443,
-                    "spaceKey": "PF",
+                    'user': 'LOGIN',
+                    'pass': 'PASSWORD',
+                    'host': 'someJira.atlassian.net',
+                    'port': 443,
+                    'spaceKey': 'PF',
                 };
                 const id = 123456;
                 const data = '<some> confluence data </some>';

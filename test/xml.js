@@ -23,7 +23,8 @@ describe('Xml', () => {
         // arrange
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true
+            convertHtmlToJiraMarkup: true,
+            host: 'someJira.atlassian.net'
         };
         const expected = [{
                 id: 'AR_Req_001',
@@ -50,7 +51,8 @@ describe('Xml', () => {
         const sampleXmlForUpdate = '<h2>Requirements</h2><table class="wrapped"><thead><tr><th class="numberingColumn">#</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr></thead><tbody><tr><td class="numberingColumn">1</td><td><p>AR_Req_001</p></td><td><p>InitialMedicalUnderwritingbyAURA</p></td><td><p>def</p></td><td colspan="1"><br/></td><td><p>Medicalunderwritingexecutiononthefront-end</p></td><td><p>Agent</p></td><td colspan="1"></td></tr></tbody></table>';
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true
+            convertHtmlToJiraMarkup: true,
+            host: 'someJira.atlassian.net'
         };
         const map = {
             AR_Req_001: 'HA-1',
@@ -72,7 +74,8 @@ describe('Xml', () => {
         const sampleXmlForUpdate = `<h2>Requirements</h2><p class="something">a</p>`;
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true
+            convertHtmlToJiraMarkup: true,
+            host: 'someJira.atlassian.net'
         };
         const map = {};
         const expected = `<h2>Requirements</h2><p class=\"something\">a</p>`;
