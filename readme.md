@@ -1,4 +1,5 @@
-# Description
+# Create multiple issues from Confluence table ![build](https://travis-ci.org/karpikpl/multipleIssuesFromConfluenceTable.svg?branch=master)
+## Description
 This script aims to fix issue with confluence https://jira.atlassian.com/browse/CONFCLOUD-52805 that Atlassian doesn't plan to fix.
 
 Confluence has "Create multiple issues from the table" feature, but it doesn't work when table has **4 rows or more**, which makes it useless for most people.
