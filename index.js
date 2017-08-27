@@ -34,8 +34,9 @@ co(function*() {
 
     console.log(`Parsed items for ${settings.confluencePage} and got ${itemsToAdd.map((i) => i.id)}`);
 
-    const jiras = yield itemsToAdd.reduce(function*(map, item) {
+    const jiras = {};
 
+    for (let item of itemsToAdd) {
         const createResponse = yield jiraClient.createJira(item);
         console.log(`Created jira: ${createResponse.data.key}`);
 
@@ -43,13 +44,12 @@ co(function*() {
         console.log(`Created jira - confluence link: ${linkResponse.statusCode}`);
 
         console.log('Item:', item);
-        map[item.id] = createResponse.data.key;
-        return map;
-    }, {});
+        jiras[item.id] = createResponse.data.key;
+    }
 
     console.log('Requirements and Jira issues: ', jiras);
+    console.log('Started Updating confluence page XML with jira links');
 
-    console.log('Updating confluence page XML with jira links');
     const updatedPage = xmlClient.updateXml(confluenceResponse.body.storage.value, jiras);
 
     confluenceResponse.body.storage.value = updatedPage;
@@ -61,5 +61,5 @@ co(function*() {
 
     return confluenceClient.postConfluenceDataAsync(confluenceResponse.id, JSON.stringify(confluenceResponse));
 })
-.then((res) => console.log('Operation completed!', res || ''))
+.then((res) => console.log('Operation completed!', (res && res.statusCode) || ''))
 .catch((err) => console.error('Operation failed.', err));

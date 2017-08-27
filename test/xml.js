@@ -7,7 +7,7 @@ const Dom = require('xmldom').DOMParser;
 
 const sampleXml = `<p class="auto-cursor-target">some text 2</p><h2>Requirements</h2><table class="wrapped confluenceTable"><colgroup><col /><col /><col /><col /><col /><col /><col /><col /></colgroup><thead><tr><th class="numberingColumn confluenceTh">#</th><th class="confluenceTh">ID</th><th class="confluenceTh">Function</th><th class="confluenceTh">Description</th><th class="confluenceTh">High level Summary</th><th class="confluenceTh">Rationale</th><th class="confluenceTh">Impacted User</th><th class="confluenceTh">JIRA Id</th></tr></thead><tbody><tr><td class="numberingColumn confluenceTd">1</td><td class="confluenceTd"><p>AR_Req_001</p></td><td class="confluenceTd"><p>Initial Medical Underwriting by AURA</p></td><td class="confluenceTd"><p>def</p></td><td colspan="1" class="confluenceTd"><br /></td><td class="confluenceTd"><p>Medical underwriting execution on the front-end</p></td><td class="confluenceTd"><p>Agent</p></td><td colspan="1" class="confluenceTd"><img class="editor-inline-macro" src="/wiki/plugins/servlet/confluence/placeholder/macro?definition=e2ppcmE6a2V5PUZSLTE5MjF9&amp;locale=en_GB" data-macro-name="jira" data-macro-id="532e95b2-8430-48e4-a36d-18204e1ae232" data-macro-parameters="columns=key,summary,type,created,updated,due,assignee,reporter,priority,status,resolution|key=FR-1921|server=JIRA (ensemble.atlassian.net)|serverId=b544e6f4-ac54-35f8-a63d-6d1ebc715244" data-macro-schema-version="1"></td></tr><tr><td class="numberingColumn confluenceTd">2</td><td class="confluenceTd"><p>AR_Req_002</p></td><td class="confluenceTd"><p>Generation of automated medical underwriting result</p></td><td class="confluenceTd"><p>abc</p></td><td colspan="1" class="confluenceTd"><br /></td><td class="confluenceTd"><p>Underwriting result execution on the front-end</p></td><td class="confluenceTd"><p>Agent</p></td><td colspan="1" class="confluenceTd"><img class="editor-inline-macro" src="/wiki/plugins/servlet/confluence/placeholder/macro?definition=e2ppcmE6a2V5PUZSLTE5MjF9&amp;locale=en_GB" data-macro-name="jira" data-macro-id="d0ecbe2f-b09d-42de-ae7b-357ae7054fe0" data-macro-parameters="columns=key,summary,type,created,updated,due,assignee,reporter,priority,status,resolution|key=FR-1921|server=JIRA (ensemble.atlassian.net)|serverId=b544e6f4-ac54-35f8-a63d-6d1ebc715244" data-macro-schema-version="1"></td></tr></tbody></table><p class="auto-cursor-target"><br /></p>`;
 
-describe.only('Xml', () => {
+describe('Xml', () => {
 
     it('should create jira object', () => {
 
@@ -27,13 +27,13 @@ describe.only('Xml', () => {
         };
         const expected = [{
                 id: 'AR_Req_001',
-                type: '<td class="confluenceTd"><p>Initial Medical Underwriting by AURA</p></td>',
-                description: '<td class="confluenceTd"><p>def</p></td>'
+                type: 'Initial Medical Underwriting by AURA',
+                description: 'def'
             },
             {
                 id: 'AR_Req_002',
-                type: '<td class="confluenceTd"><p>Generation of automated medical underwriting result</p></td>',
-                description: '<td class="confluenceTd"><p>abc</p></td>'
+                type: 'Generation of automated medical underwriting result',
+                description: 'abc'
             }];
         const target = Xml.createXmlClient(settings);
 
