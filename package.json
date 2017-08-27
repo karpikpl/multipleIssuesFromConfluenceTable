@@ -1,0 +1,24 @@
+{
+  "name": "multipleIssuesFromConfluenceTable",
+  "version": "1.0.0",
+  "description": "Create jira items for confluence page",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "author": "Piotr Karpala",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "xmldom": "^0.1.27",
+    "xpath": "^0.0.24"
+  },
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "nock": "^9.0.14"
+  }
+}
