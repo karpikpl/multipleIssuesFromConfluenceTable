@@ -5,6 +5,12 @@ Confluence has "Create multiple issues from the table" feature, but it doesn't w
 
 Using this script you can create multiple issues from confluence page with "Requirements" table.
 
+# Install
+Standard with `yarn`
+
+# Build / Test
+Standard with `yarn test`
+
 # Usage
 Although script is configurable to some extent (see `default.json`) most of it is still hardcoded for my JIRA instance. It might change in the future if I get a feature request :)
 
