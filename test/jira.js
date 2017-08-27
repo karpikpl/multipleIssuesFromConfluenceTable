@@ -26,7 +26,7 @@ describe('Jira', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "epicToLink": 'FR-123'
                 };
@@ -73,7 +73,7 @@ describe('Jira', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "epicToLink": 'FR-123'
                 };
@@ -125,7 +125,7 @@ describe('Jira', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "epicToLink": 'FR-123',
                     "pageId": 7898765
@@ -169,7 +169,7 @@ describe('Jira', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "epicToLink": 'FR-123',
                     "pageId": 7898765

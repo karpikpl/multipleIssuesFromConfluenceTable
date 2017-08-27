@@ -1,7 +1,7 @@
 {
   "user": "LOGIN",
   "pass": "PASSWORD",
-  "host": "ensemble.atlassian.net",
+  "host": "someJira.atlassian.net",
   "port": 443,
   "spaceKey": "PF",
   "convertHtmlToJiraMarkup": true,

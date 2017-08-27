@@ -26,7 +26,7 @@ describe('Confluence', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "spaceKey": "PF",
                 };
@@ -69,7 +69,7 @@ describe('Confluence', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "spaceKey": "PF",
                 };
@@ -115,7 +115,7 @@ describe('Confluence', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "spaceKey": "PF",
                 };
@@ -158,7 +158,7 @@ describe('Confluence', () => {
                 const settings = {
                     "user": "LOGIN",
                     "pass": "PASSWORD",
-                    "host": "ensemble.atlassian.net",
+                    "host": "someJira.atlassian.net",
                     "port": 443,
                     "spaceKey": "PF",
                 };
