@@ -32,6 +32,10 @@ co(function* () {
         const confluenceResponse = confluenceData.data.results[0];
         const itemsToAdd = xmlClient.parseXml(confluenceResponse.body.view.value);
 
+        if (!itemsToAdd.length) {
+            return console.warn('Did not find any jira items to create. Make sure xpath expression is correct and it matches page being parsed.');
+        }
+
         console.log(`Parsed items for ${settings.confluencePage} and got ${itemsToAdd.map((i) => i.id)}`);
 
         const jiras = {};
@@ -60,7 +64,7 @@ co(function* () {
         // console.log('Sending update to confluence', JSON.stringify(confluenceResponse));
         console.log('Sending update to confluence');
 
-        //return confluenceClient.postConfluenceDataAsync(confluenceResponse.id, JSON.stringify(confluenceResponse));
+        return confluenceClient.postConfluenceDataAsync(confluenceResponse.id, JSON.stringify(confluenceResponse));
     })
     .then((res) => console.log('Operation completed!', (res && res.statusCode) || ''))
     .catch((err) => console.error('Operation failed.', err));
