@@ -91,7 +91,7 @@ describe('Xml', () => {
     it('updates simple xml with &', () => {
 
         // arrange
-        const sampleXmlForUpdate = `<p class="auto-cursor-target"><br/></p><h2>User interaction and design from C&amp;A</h2><p><ac:placeholder >Include any mockups, diagrams or visual designs relating to these requirements.</ac:placeholder></p>`;
+        const sampleXmlForUpdate = `<h2>User interaction and design from C&amp;A</h2><p><ac:placeholder>Include any mockups, diagrams or visual designs relating to these requirements.</ac:placeholder></p><h2>Questions and Clarifications</h2><p>Below is a list of questions to be addressed as a result of this requirements document:</p><table class="relative-table wrapped" style="width: 1493.0px;"></table>`;
         const settings = {
             tableSection: 'Requirements',
             convertHtmlToJiraMarkup: true,
