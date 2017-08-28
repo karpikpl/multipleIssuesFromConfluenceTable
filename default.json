@@ -4,7 +4,6 @@
   "host": "someJira.atlassian.net",
   "port": 443,
   "spaceKey": "PF",
-  "convertHtmlToJiraMarkup": true,
   "epicToLink": "FR-2130",
   "confluencePage": "Confluence Tests",
   "pageId": 1739865,

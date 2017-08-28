@@ -23,7 +23,6 @@ describe('Xml', () => {
         // arrange
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true,
             host: 'someJira.atlassian.net'
         };
         const expected = [{
@@ -51,7 +50,6 @@ describe('Xml', () => {
         const sampleXmlForUpdate = '<h2>Requirements</h2><table class="wrapped"><thead><tr><th class="numberingColumn">#</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr></thead><tbody><tr><td class="numberingColumn">1</td><td><p>AR_Req_001</p></td><td><p>InitialMedicalUnderwritingbyAURA</p></td><td><p>def</p></td><td colspan="1"><br/></td><td><p>Medicalunderwritingexecutiononthefront-end</p></td><td><p>Agent</p></td><td colspan="1"></td></tr></tbody></table>';
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true,
             host: 'someJira.atlassian.net'
         };
         const map = {
@@ -74,7 +72,6 @@ describe('Xml', () => {
         const sampleXmlForUpdate = `<h2>Requirements</h2><p class="something">a</p>`;
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true,
             host: 'someJira.atlassian.net'
         };
         const map = {};
@@ -94,7 +91,6 @@ describe('Xml', () => {
         const sampleXmlForUpdate = `<h2>User interaction and design from C&amp;A</h2><p><ac:placeholder>Include any mockups, diagrams or visual designs relating to these requirements.</ac:placeholder></p><h2>Questions and Clarifications</h2><p>Below is a list of questions to be addressed as a result of this requirements document:</p><table class="relative-table wrapped" style="width: 1493.0px;"></table>`;
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true,
             host: 'someJira.atlassian.net'
         };
         const map = {};
@@ -113,7 +109,6 @@ describe('Xml', () => {
         const sampleXmlForUpdate = `<h2>ly with the policyholder&rsquo;s and guardian&rsquo;s ide</h2>`;
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true,
             host: 'someJira.atlassian.net'
         };
         const map = {};
@@ -132,7 +127,6 @@ describe('Xml', () => {
         const sampleXmlForUpdate = `<p class="auto-cursor-target"><br /></p><table><tbody><tr><th style="text-align: left;">Result</th><th style="text-align: left;">Description</th><th style="text-align: left;">Entity Name</th><th style="text-align: left;">Entity Number</th></tr><tr><td><br /></td><td>non-breaking space</td><td>&amp;nbsp;</td><td>&amp;#160;</td></tr><tr><td>&lt;</td><td>less than</td><td>&amp;lt;</td><td>&amp;#60;</td></tr><tr><td>&gt;</td><td>greater than</td><td>&amp;gt;</td><td>&amp;#62;</td></tr><tr><td>&amp;</td><td>ampersand</td><td>&amp;amp;</td><td>&amp;#38;</td></tr><tr><td>&quot;</td><td>double quotation mark</td><td>&amp;quot;</td><td>&amp;#34;</td></tr><tr><td>'</td><td>single quotation mark (apostrophe)</td><td>&amp;apos;</td><td>&amp;#39;</td></tr><tr><td>&cent;</td><td>cent</td><td>&amp;cent;</td><td>&amp;#162;</td></tr><tr><td>&pound;</td><td>pound</td><td>&amp;pound;</td><td>&amp;#163;</td></tr><tr><td>&yen;</td><td>yen</td><td>&amp;yen;</td><td>&amp;#165;</td></tr><tr><td>&euro;</td><td>euro</td><td>&amp;euro;</td><td>&amp;#8364;</td></tr><tr><td>&copy;</td><td>copyright</td><td>&amp;copy;</td><td>&amp;#169;</td></tr><tr><td>&reg;</td><td>registered trademark</td><td>&amp;reg;</td><td>&amp;#174;</td></tr></tbody></table><p class="auto-cursor-target"><br /></p>`;
         const settings = {
             tableSection: 'Requirements',
-            convertHtmlToJiraMarkup: true,
             host: 'someJira.atlassian.net'
         };
         const map = {};
