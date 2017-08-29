@@ -151,4 +151,23 @@ describe('Xml', () => {
         // assert
         data.should.equal('AR_Req_002');
     });
+
+    it('skips update when no column for jira id', () => {
+
+        // arrange
+        const settingsWithoutJiraColumn = {
+          confluence: {
+            table_indexes: {
+              jiraId: null
+            }
+          }
+        };
+        const target = Xml.createXmlClient(settingsWithoutJiraColumn);
+
+        // act
+        const data = target.updateXml('', {});
+
+        // assert
+        should.not.exist(data);
+    });
 });

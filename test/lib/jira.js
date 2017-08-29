@@ -187,7 +187,7 @@ describe('Jira', () => {
     });
   });
 
-  describe.only('create Jira Payload', () => {
+  describe('create Jira Payload', () => {
 
     it('Creates valid Jira Payload', () => {
 
