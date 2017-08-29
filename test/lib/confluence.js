@@ -44,7 +44,7 @@ describe('Confluence', () => {
                             }
                         }
                     })
-                    .get(`/wiki/rest/api/content?spaceKey=${settings.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
+                    .get(`/wiki/rest/api/content?spaceKey=${settings.confluence.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
                     .reply(200, {
                         conf: 'some data'
                     })
@@ -80,7 +80,7 @@ describe('Confluence', () => {
                             }
                         }
                     })
-                    .get(`/wiki/rest/api/content?spaceKey=${settings.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
+                    .get(`/wiki/rest/api/content?spaceKey=${settings.confluence.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
                     .reply(409, 'Operation not allowed')
                     .log(console.log);
                 const target = Confluence.createConfluenceClient(settings);
