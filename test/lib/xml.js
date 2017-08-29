@@ -32,12 +32,14 @@ describe('Xml', () => {
         // arrange
         const expected = [{
                 id: 'AR_Req_001',
-                type: 'Initial Medical Underwriting by AURA',
+                priority: '',
+                title: 'AR_Req_001 : Initial Medical Underwriting by AURA',
                 description: 'def'
             },
             {
                 id: 'AR_Req_002',
-                type: 'Generation of automated medical underwriting result',
+                priority: '',
+                title: 'AR_Req_002 : Generation of automated medical underwriting result',
                 description: 'abc'
             }];
         const target = Xml.createXmlClient(settings);

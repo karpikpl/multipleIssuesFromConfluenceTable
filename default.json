@@ -6,10 +6,18 @@
     "port": 443
   },
   "confluence": {
+    "updateConfluence": true,
     "spaceKey": "PF",
     "confluencePage": "Confluence Tests",
     "tableSection": "Requirements",
-    "pageId": 1739865
+    "pageId": 1739865,
+    "table_indexes": {
+      "id": 1,
+      "title": [1, 2],
+      "description": [3],
+      "priority": 4,
+      "jiraId": 7
+    }
   },
   "jira": {
     "epicToLink": "FR-2130",
@@ -17,6 +25,7 @@
     "assignee_name": "SGuy",
     "fixVersion_id": "17502",
     "project_key": "FR",
-    "confluence_appId": "49bb368d-6cf7-3bd5-ab1d-6a21b0606b02"
+    "confluence_appId": "49bb368d-6cf7-3bd5-ab1d-6a21b0606b02",
+    "customfield_for_id": "customfield_TO_STORE_ID"
   }
 }

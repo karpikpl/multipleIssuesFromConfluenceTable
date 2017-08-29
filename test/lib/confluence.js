@@ -131,8 +131,7 @@ describe('Confluence', () => {
 
                 // assert
                 confluenceMock.isDone().should.be.true;
-                result.statusCode.should.be.equal(200);
-                result.data.result.should.equal('ok');
+                result.should.match(/200/);
             }, conf)
             .then(done)
             .catch(done);
