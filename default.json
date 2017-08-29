@@ -1,12 +1,22 @@
 {
-  "user": "LOGIN",
-  "pass": "PASSWORD",
-  "host": "someJira.atlassian.net",
-  "port": 443,
-  "spaceKey": "PF",
-  "epicToLink": "FR-2130",
-  "confluencePage": "Confluence Tests",
-  "pageId": 1739865,
-  "tableSection": "Requirements",
-  "DEBUG": false
+  "atlassian": {
+    "user": "LOGIN",
+    "pass": "PASSWORD",
+    "host": "someJira.atlassian.net",
+    "port": 443
+  },
+  "confluence": {
+    "spaceKey": "PF",
+    "confluencePage": "Confluence Tests",
+    "tableSection": "Requirements",
+    "pageId": 1739865
+  },
+  "jira": {
+    "epicToLink": "FR-2130",
+    "issueType_name": "Configuration",
+    "assignee_name": "JTerschak",
+    "fixVersion_id": "17502",
+    "project_key": "FR",
+    "confluence_appId": "49bb368d-6cf7-3bd5-ab1d-6a21b0606b02"
+  }
 }
