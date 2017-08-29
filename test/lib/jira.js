@@ -1,16 +1,25 @@
 /*jshint esversion: 6, node: true*/
 'use strict';
 const should = require('chai').should();
-const Jira = require('../lib/jira');
+const Jira = require('../../lib/jira');
 const Nock = require('nock');
 const co = require('co');
+const testHelper = require('../testHelper');
+
+let conf;
+
+before((done) => {
+
+    conf = testHelper.getSettings();
+    done();
+});
 
 describe('Jira', () => {
 
     it('should create jira object', () => {
 
         // act
-        const target = Jira.createJiraClient({});
+        const target = Jira.createJiraClient(conf);
 
         // assert
         should.exist(target);
@@ -20,28 +29,21 @@ describe('Jira', () => {
 
         it('creates new issue in Jira', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'epicToLink': 'FR-123'
-                };
                 const item = {
                     id: 'Req 1',
                     type: 'Configuration',
                     description: 'Something to do'
                 };
 
-                const jiraMock = Nock(`https://${settings.host}`, {
+                const jiraMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
@@ -60,35 +62,28 @@ describe('Jira', () => {
                 jiraMock.isDone().should.be.true;
                 result.statusCode.should.be.equal(201);
                 result.data.conf.should.be.equal('issue created');
-            })
+            }, conf)
             .then(done)
             .catch(done);
         });
 
         it('returns an error when could not create issue in Jira', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'epicToLink': 'FR-123'
-                };
                 const item = {
                     id: 'Req 1',
                     type: 'Configuration',
                     description: 'Something to do'
                 };
 
-                const jiraMock = Nock(`https://${settings.host}`, {
+                const jiraMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
@@ -102,7 +97,7 @@ describe('Jira', () => {
 
                 // act
                 const result = yield target.createJira(item);
-            })
+            }, conf)
             .then((res) => done('this should not happen - were expecting an error'))
             .catch((err) => {
 
@@ -119,25 +114,17 @@ describe('Jira', () => {
 
         it('creates remote link in Jira', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'epicToLink': 'FR-123',
-                    'pageId': 7898765
-                };
                 const key = 'HA-678';
 
-                const jiraMock = Nock(`https://${settings.host}`, {
+                const jiraMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
@@ -156,32 +143,24 @@ describe('Jira', () => {
                 jiraMock.isDone().should.be.true;
                 result.statusCode.should.be.equal(200);
                 result.data.conf.should.be.equal('issue updated');
-            })
+            }, conf)
             .then(done)
             .catch(done);
         });
 
         it('returns an error when could not create link in Jira', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'epicToLink': 'FR-123',
-                    'pageId': 7898765
-                };
                 const key = 'HA-678';
 
-                const jiraMock = Nock(`https://${settings.host}`, {
+                const jiraMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
@@ -195,7 +174,7 @@ describe('Jira', () => {
 
                 // act
                 const result = yield target.createRemoteLink(key);
-            })
+            }, conf)
             .then((res) => done('this should not happen - were expecting an error'))
             .catch((err) => {
 

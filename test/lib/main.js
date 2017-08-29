@@ -3,15 +3,17 @@
 const Chai = require('chai');
 const should = Chai.should();
 
-const main = require('../index');
+const main = require('../../lib/main');
 
-describe('Index integration test', () => {
+describe.skip('Min flow integration test', (done) => {
 
     it('should read confluence page, create jira issues and update confluence with result', () => {
+
+        // arrange
 
         // act
 
         // assert
-        true.should.be.false;
+
     });
 });

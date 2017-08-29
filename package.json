@@ -4,7 +4,7 @@
   "description": "Create jira items for confluence page",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha ./test"
+    "test": "nyc mocha ./test --recursive --use_strict"
   },
   "author": "Piotr Karpala",
   "license": "MIT",
