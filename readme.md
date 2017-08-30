@@ -15,7 +15,7 @@ Standard with `yarn test`
 # Usage
 1. Create your own `settings.json` based on `default.json`
 2. Format your confluence page - table needs to be after h2. header with text specified in `settings.tableSection`
-3. run
+3. Run
 ```
 yarn start yourSettings.json
 ```
