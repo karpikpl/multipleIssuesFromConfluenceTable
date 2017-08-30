@@ -21,7 +21,7 @@ describe('Min flow integration test', (done) => {
 
         co(function* () {
 
-                const settingsBuffer = yield ReadFile(Path.join(__dirname, '../data/settings.json'));
+                const settingsBuffer = yield ReadFile(Path.join(__dirname, '../data/settingsForMainTest.json'));
                 settings = JSON.parse(settingsBuffer.toString('utf8'));
 
                 const confluenceResponseData = yield ReadFile(Path.join(__dirname, '../data/getConfluenceResponse.json'));
