@@ -1,0 +1,12 @@
+{
+    "globalId": "appId=49bb368d-6cf7-3bd5-ab1d-6a21b0606b02&pageId=1234567",
+    "application": {
+      "type": "com.atlassian.confluence",
+      "name": "Confluence (cloud.atlassian.net)"
+    },
+    "relationship": "Wiki Page",
+    "object": {
+      "url": "https://cloud.atlassian.net/wiki/pages/viewpage.action?pageId=1234567",
+      "title": "Wiki Page"
+    }
+  }

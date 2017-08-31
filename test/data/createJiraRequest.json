@@ -1,0 +1,23 @@
+{
+  "fields": {
+    "project": {
+      "key": "JIRA"
+    },
+    "summary": "T1 : D1",
+    "description": "T1\nMedium",
+    "issuetype": {
+      "name": "Story"
+    },
+    "customfield_TO_STORE_ID": "T1",
+    "customfield_10008": "JIRA-EPIC-1",
+    "assignee": {
+      "name": "SGuy"
+    },
+    "fixVersions": [{
+      "id": "1600"
+    }],
+    "priority": {
+      "name": "Medium"
+    }
+  }
+}

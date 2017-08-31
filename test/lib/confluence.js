@@ -1,16 +1,25 @@
 /*jshint esversion: 6, node: true*/
 'use strict';
 const should = require('chai').should();
-const Confluence = require('../lib/confluence');
+const Confluence = require('../../lib/confluence');
 const Nock = require('nock');
 const co = require('co');
+const testHelper = require('../testHelper');
+
+let conf;
+
+before((done) => {
+
+    conf = testHelper.getSettings();
+    done();
+});
 
 describe('Confluence', () => {
 
     it('should create confluence object', () => {
 
         // act
-        const target = Confluence.createConfluenceClient({});
+        const target = Confluence.createConfluenceClient(conf);
 
         // assert
         should.exist(target);
@@ -20,29 +29,22 @@ describe('Confluence', () => {
 
         it('gets data from confluence', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'spaceKey': 'PF',
-                };
                 const path = 'abc';
 
-                const confluenceMock = Nock(`https://${settings.host}`, {
+                const confluenceMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
                     })
-                    .get(`/wiki/rest/api/content?spaceKey=${settings.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
+                    .get(`/wiki/rest/api/content?spaceKey=${settings.confluence.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
                     .reply(200, {
                         conf: 'some data'
                     })
@@ -56,43 +58,36 @@ describe('Confluence', () => {
                 confluenceMock.isDone().should.be.true;
                 result.statusCode.should.be.equal(200);
                 result.data.conf.should.be.equal('some data');
-            })
+            }, conf)
             .then(done)
             .catch(done);
         });
 
         it('returns error when get fails', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'spaceKey': 'PF',
-                };
                 const path = 'abc';
 
-                const confluenceMock = Nock(`https://${settings.host}`, {
+                const confluenceMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
                     })
-                    .get(`/wiki/rest/api/content?spaceKey=${settings.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
+                    .get(`/wiki/rest/api/content?spaceKey=${settings.confluence.spaceKey}&title=${path}&expand=body.view,body.storage,version`)
                     .reply(409, 'Operation not allowed')
                     .log(console.log);
                 const target = Confluence.createConfluenceClient(settings);
 
                 // act
                 const result = yield target.getConfluenceDataAsync(path);
-            })
+            }, conf)
             .then((res) => done('this should not happen - were expecting an error'))
             .catch((err) => {
 
@@ -109,25 +104,18 @@ describe('Confluence', () => {
 
         it('posts data to confluence', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'spaceKey': 'PF',
-                };
                 const id = 123456;
                 const data = '<some> confluence data </some>';
 
-                const confluenceMock = Nock(`https://${settings.host}`, {
+                const confluenceMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
@@ -143,34 +131,26 @@ describe('Confluence', () => {
 
                 // assert
                 confluenceMock.isDone().should.be.true;
-                result.statusCode.should.be.equal(200);
-                result.data.result.should.equal('ok');
-            })
+                result.should.match(/200/);
+            }, conf)
             .then(done)
             .catch(done);
         });
 
         it('returns error when post fails', (done) => {
 
-            co(function*() {
+            co(function*(settings) {
 
                 // arrange
-                const settings = {
-                    'user': 'LOGIN',
-                    'pass': 'PASSWORD',
-                    'host': 'someJira.atlassian.net',
-                    'port': 443,
-                    'spaceKey': 'PF',
-                };
                 const id = 123456;
                 const data = '<some> confluence data </some>';
 
-                const confluenceMock = Nock(`https://${settings.host}`, {
+                const confluenceMock = Nock(`https://${settings.atlassian.host}`, {
                         reqheaders: {
                             'authorization': function (headerValue) {
 
                                 // verify that header was sent correctly
-                                const auth = 'Basic ' + new Buffer(`${settings.user}:${settings.pass}`).toString('base64');
+                                const auth = 'Basic ' + new Buffer(`${settings.atlassian.user}:${settings.atlassian.pass}`).toString('base64');
                                 return headerValue === auth;
                             }
                         }
@@ -183,7 +163,7 @@ describe('Confluence', () => {
 
                 // act
                 const result = yield target.postConfluenceDataAsync(id, data);
-            })
+            }, conf)
             .then((res) => done('this should not happen - were expecting an error'))
             .catch((err) => {
 

@@ -13,12 +13,16 @@ Standard with `yarn`
 Standard with `yarn test`
 
 # Usage
+1. Create your own `settings.json` based on `default.json`
+2. Format your confluence page - table needs to be after h2. header with text specified in `settings.tableSection`
+3. Run
+```
+yarn start yourSettings.json
+```
+
 Although script is configurable to some extent (see `default.json`) most of it is still hardcoded for my JIRA instance. It might change in the future if I get a feature request :)
 
 For now - change Jira payloads in `lib\jira.js` and run
-```
-node yourSettings.json
-```
 
 # Sample
 ### 1. Confluence page with table
