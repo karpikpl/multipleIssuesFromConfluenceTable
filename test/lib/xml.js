@@ -3,7 +3,8 @@
 const Chai = require('chai');
 const should = Chai.should();
 const Xml = require('../../lib/xml');
-const Dom = require('xmldom').DOMParser;
+const Dom = require('xmldom')
+    .DOMParser;
 const testHelper = require('../testHelper');
 
 let settings;
@@ -129,7 +130,8 @@ describe('Xml', () => {
     it('gets node value', () => {
 
         // arrange
-        const doc = new Dom().parseFromString(`<td><p>AR_Req_001</p></td>`);
+        const doc = new Dom()
+            .parseFromString(`<td><p>AR_Req_001</p></td>`);
         const target = Xml.createXmlClient();
 
         // act
@@ -142,7 +144,8 @@ describe('Xml', () => {
     it('gets node value - with attributes', () => {
 
         // arrange
-        const doc = new Dom().parseFromString(`'<td class="confluenceTd">        <p>AR_Req_002</p>      </td>'`);
+        const doc = new Dom()
+            .parseFromString(`'<td class="confluenceTd">        <p>AR_Req_002</p>      </td>'`);
         const target = Xml.createXmlClient();
 
         // act
@@ -156,11 +159,11 @@ describe('Xml', () => {
 
         // arrange
         const settingsWithoutJiraColumn = {
-          confluence: {
-            table_indexes: {
-              jiraId: null
+            confluence: {
+                table_indexes: {
+                    jiraId: null
+                }
             }
-          }
         };
         const target = Xml.createXmlClient(settingsWithoutJiraColumn);
 
